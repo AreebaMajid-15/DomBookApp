@@ -9,7 +9,7 @@ availbook.addEventListener("click", function(){
 })
 
 let Borbook = document.getElementById("Borbook")
-aBorbook.addEventListener("click", function(){
+Borbook.addEventListener("click", function(){
  displaybrwbook()
     
 })
@@ -135,9 +135,7 @@ window.onload = async () => {
  }
 
 
-
-
- async function   displaybrwbook() {
+ async function  displaybrwbook() {
     try{ 
         let res = await fetch(`${baseurl}/BorrowBooks`);
         let data= await res.json()
