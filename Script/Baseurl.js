@@ -1,0 +1,1 @@
+export const baseurl = "https://righteous-satin-building.glitch.me/"
