@@ -9,8 +9,8 @@ availbook.addEventListener("click", function(){
 })
 
 let Borbook = document.getElementById("Borbook")
-availbook.addEventListener("click", function(){
-
+aBorbook.addEventListener("click", function(){
+ displaybrwbook()
     
 })
 
@@ -72,6 +72,7 @@ async function getbook() {
       let Days =  document.createElement("h4")
       Days.textContent = `Borrowed Days: ${num}`
         Brwbtnbtnfun(el, i)
+        addtoborw(el)
     });
 
     card.append( title, author, category, status, Brwbtn )
@@ -111,3 +112,94 @@ window.onload = async () => {
         console.log(err)
      })
  }
+
+
+ function addtoborw(el) {
+    
+    fetch(`${baseurl}/BorrowBooks`, {
+        method: "POST", 
+        headers: {
+            "content-type": "application/json",
+    
+        },
+        body: JSON.stringify(el),
+        })
+        .then(() => {
+            alert("Book Added");
+            window.location.reload()
+      })
+      .catch((err) => {
+        alert("Something went wrong in adding book")
+      })
+
+ }
+
+
+
+
+ async function   displaybrwbook() {
+    try{ 
+        let res = await fetch(`${baseurl}/BorrowBooks`);
+        let data= await res.json()
+        return data;
+    }
+    catch(err){
+        console.log(err)
+     alert("Something went wrong in displaying borrowed book")
+    }
+ }
+
+ function displaybook(arr){
+    let cont = document.getElementById("brwbook")
+    cont.innerHTML = ""
+
+    arr.map((el,i ) =>{
+        let card = document.createElement("div")
+        card.setAttribute("class", "bookcard");
+
+    let title = document.createElement("h4");
+    title.textContent = `Title: ${el.title} ` ;
+
+    let author = document.createElement("h5")
+    author.textContent = `Author: ${el.author}`;
+
+    let category = document.createElement("h5")
+    category.textContent = `Category: ${el.category}`
+    
+    let status = document.createElement("h6")
+    status.textContent = el.status == true ? "Status: Not Available" : "Status: Available";
+
+
+// verify button
+ //   let  verifybtn  = document.createElement("button")
+ //   verifybtn.textContent = "Verify Book"
+// to verify button function
+  //  verifybtn.addEventListener("click", function(){
+  //      alert("Are you sure to verify?")
+  //      verifybtnfun( el, i)
+  //  })
+
+    // to delete button
+    let Brwbtn = document.createElement("button")
+    Brwbtn.textContent = "Borrow Book"
+
+    // to delete book function
+      Brwbtn.addEventListener("click", function(){
+     let num = prompt("You can only bur books for 10days")
+      let Days =  document.createElement("h4")
+      Days.textContent = `Borrowed Days: ${num}`
+        Brwbtnbtnfun(el, i)
+        addtoborw(el)
+    });
+
+    card.append( title, author, category, status, Brwbtn )
+     cont.append(card)
+
+ });
+}
+window.onload = async () => {
+    let arr = await getbook();
+    diaplaybook(arr);
+    
+}
+ 
