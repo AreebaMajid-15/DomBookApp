@@ -1,0 +1,29 @@
+
+ #Allbook{
+    text-align: center;
+
+ }
+
+ #addbook{
+    margin: auto;
+    background-color: aquamarine;
+    color: black;
+    text-align: center;
+    align-items: center;
+    width: 60%;
+    height: 15rem;
+ }
+ 
+.bookcard{
+    border: 1px solid black;
+    background-color: aquamarine;
+    
+ }
+
+ #diplaybook{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 10px;
+    margin: auto;
+ }

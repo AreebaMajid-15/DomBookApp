@@ -67,7 +67,7 @@ async function getbook() {
     category.textContent = `Category: ${el.category}`
     
     let status = document.createElement("h6")
-    status.textContent = el.status == true ? "Status: Pending" : "Status: verified";
+    status.textContent = el.status == true ? "Status: Verified" : "Status: Pending";
 
 
 // verify button
@@ -117,6 +117,7 @@ window.onload = async () => {
      })
      .then( () =>{
         alert("Book is verified")
+        window.location.reload()
      })
      .catch( (err) => {
         alert("something went wrong in verfying book")
